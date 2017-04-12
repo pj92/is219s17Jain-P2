@@ -54,7 +54,28 @@ var mJson;
 
 // URL for the JSON to load by default
 // Some options for you are: images.json, images.short.json; you will need to create your own extra.json later
-var mUrl = 'insert_url_here_to_image_json';
+var mUrl = 'images.json';
+
+
+mRequest.onreadystatechange = function() {
+  if (mRequest.readyState == 4 && mRequest.status == 200) {
+    try {
+      mJson = JSON.parse(mRequest.responseText);
+      console.log(mJson);
+
+      for(var i=0; i < mJson.images.length;i++)
+			{
+				mImages.push(new GalleryImage(mJson.images[i].imgLocation,mJson.images[i].description,mJson.images[i].date,mJson.images[i].imgPath));
+			}
+
+		} catch(err) {
+			console.log(err.message);
+		}
+  }
+};
+
+mRequest.open("GET",mURL, true); 
+mRequest.send();
 
 
 //You can optionally use the following function as your event callback for loading the source of Images from your json data (for HTMLImageObject).
@@ -70,6 +91,11 @@ $(document).ready( function() {
 
 	// This initially hides the photos' metadata information
 	$('.details').eq(0).hide();
+
+  $(".moreIndicator").click(function()
+	{
+		$( "img.rot90" ).toggleClass("rot270",3000);
+		$(".details").slideToggle(1000);
 
 });
 
