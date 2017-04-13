@@ -73,7 +73,7 @@ var mURL;
 var mURL;
 if($_GET["json"] == undefined)
 {
-	mURL = "images.json";
+	mURL = "extra.json";
 }
 else{
 	mURL = $_GET["json"];
@@ -115,6 +115,21 @@ $(document).ready( function() {
 	{
 		$( "img.rot90" ).toggleClass("rot270",3000);
 		$(".details").slideToggle(1000);
+
+});
+
+  $("#prevPhoto").click(function()
+  {
+    mCurrentIndex -= 2;
+    swapPhoto();
+    console.log(mCurrentIndex);
+  });
+
+  $("#nextPhoto").click(function()
+  {
+    swapPhoto();
+
+  });
 
 });
 
