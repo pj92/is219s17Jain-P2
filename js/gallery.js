@@ -36,13 +36,21 @@ function animate() {
 var mCurrentIndex = 0;
 
 function swapPhoto() {
-	//Add code here to access the #slideShow element.
-	//Access the img element and replace its source
-	//with a new image from your images array which is loaded
-	//from the JSON string
+  if(mCurrentIndex < 0)
+	{
+		mCurrentIndex +=  mImages.length;
+	}
   $("#photo").attr('src', mImages[mCurrentIndex].img);
+  $(".location").text("Location: "+mImages[mCurrentIndex].location);
+	$(".description").text("Description: "+mImages[mCurrentIndex].description);
+	$(".date").text("Date: "+mImages[mCurrentIndex].date);
+
   mCurrentIndex++;
-	console.log('swap photo');
+
+  if(mCurrentIndex >=  mImages.length){
+		mCurrentIndex = 0;
+	}
+
 }
 
 mCurrentIndex++;
